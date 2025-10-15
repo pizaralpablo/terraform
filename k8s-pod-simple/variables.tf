@@ -13,7 +13,7 @@ variable "kubeconfig_context" {
 variable "release_name" {
   description = "Nombre del release de Helm"
   type        = string
-  default     = "app"
+  default     = "app2"
 }
 
 variable "namespace" {
