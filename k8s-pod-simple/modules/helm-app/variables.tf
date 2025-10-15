@@ -24,7 +24,7 @@ variable "image_repository" {
 variable "image_tag" {
   description = "Tag de la imagen"
   type        = string
-  default     = "stable"
+  default     = "1.25.5-alpine"
 }
 
 variable "replicas" {
@@ -68,4 +68,5 @@ variable "service_port" {
   type        = number
   default     = 80
 }
+
 
