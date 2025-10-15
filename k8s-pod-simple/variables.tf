@@ -25,7 +25,7 @@ variable "namespace" {
 variable "chart_name" {
   description = "Nombre del chart local en ./charts"
   type        = string
-  default     = "app"
+  default     = "app2"
 }
 
 variable "image_repository" {
