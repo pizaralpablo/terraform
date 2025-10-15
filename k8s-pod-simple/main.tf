@@ -13,7 +13,7 @@ terraform {
 }
 
 module "helm_app" {
-  source = "./modules/helm-app2"
+  source = "./modules/helm-app"
 
   release_name = var.release_name
   namespace    = var.namespace
