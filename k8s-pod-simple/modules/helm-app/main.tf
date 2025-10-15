@@ -29,13 +29,6 @@ resource "helm_release" "app" {
         type = var.service_type
         port = var.service_port
       }
-      # Configuración para métricas
-      serviceMonitor = {
-        enabled = var.service_monitor_enabled
-        interval = var.metrics_interval
-        scrapeTimeout = var.metrics_scrape_timeout
-        labels = var.service_monitor_labels
-      }
     })
   ]
 
@@ -44,31 +37,3 @@ resource "helm_release" "app" {
   }
 }
 
-# ServiceMonitor para Prometheus
-resource "kubernetes_manifest" "service_monitor" {
-  count = var.service_monitor_enabled ? 1 : 0
-  
-  depends_on = [var.prometheus_dependency]
-  
-  manifest = {
-    apiVersion = "monitoring.coreos.com/v1"
-    kind       = "ServiceMonitor"
-    metadata = {
-      name      = "${var.release_name}-monitor"
-      namespace = var.namespace
-      labels    = var.service_monitor_labels
-    }
-    spec = {
-      selector = {
-        matchLabels = {
-          app = var.release_name
-        }
-      }
-      endpoints = [{
-        port     = "http"
-        interval = var.metrics_interval
-        path     = var.metrics_path
-      }]
-    }
-  }
-}
